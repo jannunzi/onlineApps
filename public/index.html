@@ -1,14 +1,14 @@
-<html>
+<html ng-app="OnlineApps">
 <head>
     <title>The MEAN Stack</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <script src="js/angular.min.js"></script>
+    <script src="js/app.js"></script>
     <script src="features/services/controller.js"></script>
 </head>
-<body ng-app="">
-    <div class="container" ng-controller="ServicesCtrl">
+<body>
+    <div class="container" ng-controller="ApplicationsCtrl">
         <h1>Service Client Maker</h1>
-        {{message}}
         <table class="table">
             <thead>
                 <tr>
@@ -32,7 +32,8 @@
                     </td>
                     <td>
                         <button ng-click="remove(serviceClient._id)" class="btn btn-danger">Remove</button>
-                        <button ng-click="select(serviceClient._id)" class="btn btn-warning">Select</button></td>
+                        <button ng-click="select(serviceClient._id)" class="btn btn-warning">Select</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
