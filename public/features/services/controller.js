@@ -1,4 +1,4 @@
-app.controller("ApplicationsCtrl", function ApplicationsCtrl($scope, $http) {
+app.controller("ApplicationsCtrl", [ "$scope", "$http", function ($scope, $http) {
 
     $scope.message = "Hello from controller";
 
@@ -40,4 +40,4 @@ app.controller("ApplicationsCtrl", function ApplicationsCtrl($scope, $http) {
     }
 
     $scope.all();
-});
+}]);
