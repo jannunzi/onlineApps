@@ -1,7 +1,7 @@
 // load webservice and database libraries
 var express = require('express');
 var mongojs = require('mongojs');
-var applications = require('./public/features/services/server.js');
+var applications = require('./public/features/applications/server.js');
 
 // instantiate both libraries and connecto to the cs5610353 database
 var app = express();
