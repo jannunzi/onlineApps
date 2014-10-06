@@ -12,9 +12,9 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.bodyParser());
 
 var mongodbConnectionString = "mongodb://admin:UpwCdvF5cYQa@127.12.162.130:27017/cs5610353";
-if (typeof process.env.OPENSHIFT_MONGODB_DB_URL == "undefined") {
-    mongodbConnectionString = "cs5610353";
-}
+//if (typeof process.env.OPENSHIFT_MONGODB_DB_URL == "undefined") {
+//    mongodbConnectionString = "cs5610353";
+//}
 var db = mongojs(mongodbConnectionString, ["serviceClients"]);
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
