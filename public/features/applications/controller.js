@@ -1,42 +1,68 @@
-app.controller("ApplicationsCtrl", [ "$scope", "$http", function ($scope, $http) {
+app.controller("ApplicationsNewCtrl",
+    ["$scope", "$http", "ApplicationsService", "$routeParams",
+        function ($scope, $http, ApplicationsService, $routeParams) {
+            $scope.create = function () {
+                ApplicationsService.create($scope.application, function () {
+                    window.history.go(-1);
+                });
+            }
+        }]);
 
-    $scope.message = "Hello from controller";
+app.controller("ApplicationsEditCtrl",
+    ["$scope", "$http", "ApplicationsService", "$routeParams",
+        function ($scope, $http, ApplicationsService, $routeParams) {
+        //    var appId = $routeParams["id"];
+            var appId = $routeParams.id;
+            console.log(appId);
 
-    $scope.create = function () {
-        $http.post("/applications", $scope.serviceClient)
-		.success(function (response) {
-		    $scope.all();
-		});
-    }
+            ApplicationsService.selectOne(appId, function (response) {
+                $scope.application = response;
+                console.log($scope.application);
+            });
+
+            $scope.update = function () {
+                ApplicationsService.update($scope.application._id,
+                    $scope.application, function () {
+                    window.history.go(-1);
+                });
+            };
+
+            $scope.remove = function (id) {
+                ApplicationsService.remove(id, function () {
+                    window.history.go(-1);
+                });
+            };
+
+
+
+        }]);
+
+app.controller("ApplicationsListCtrl", ["$scope", "$http", "ApplicationsService", function ($scope, $http, ApplicationsService) {
+
+    //$scope.create = function () {
+    //    ApplicationsService.create($scope.serviceClient, $scope.all)
+    //}
 
     $scope.renderServiceClients = function (response) {
         $scope.serviceClients = response;
     };
 
-    $scope.remove = function (id) {
-        $http.delete("/applications/" + id)
-		.success(function (response) {
-		    $scope.all();
-		});
-    };
+    //$scope.remove = function (id) {
+    //    ApplicationsService.remove(id, $scope.all);
+    //};
 
-    $scope.update = function () {
-        $http.put("/applications/" + $scope.serviceClient._id, $scope.serviceClient)
-		.success(function (response) {
-		    $scope.all();
-		});
-    };
+    //$scope.update = function () {
+    //    ApplicationsService.update($scope.serviceClient._id, $scope.serviceClient, $scope.all);
+    //};
 
-    $scope.select = function (id) {
-        $http.get("/applications/" + id)
-		.success(function (response) {
-		    $scope.serviceClient = response;
-		});
-    };
+    //$scope.select = function (id) {
+    //    ApplicationsService.selectOne(id, function (response) {
+    //        $scope.serviceClient = response;
+    //    });
+    //};
 
     $scope.all = function () {
-        $http.get("/applications")
-		.success($scope.renderServiceClients);
+        ApplicationsService.selectAll($scope.renderServiceClients);
     }
 
     $scope.all();
